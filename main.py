@@ -29,20 +29,36 @@ class WebGraph:
 if __name__ == "__main__":
     web_graph = WebGraph()
 
-    web_graph.add_node("A", width=100)
-    web_graph.add_node("B", width=100)
-    web_graph.add_node("C", width=100)
-    web_graph.add_node("D", width=100)
-    web_graph.add_node("Z", width=100)
+    web_graph.add_node("HOME", width=100)
+    web_graph.add_node("SEARCH", width=550)
+    web_graph.add_node("CART", width=25)
+    web_graph.add_node("PRODUCT", width=175)
+    web_graph.add_node("ADD TO CART", width=215)
+    web_graph.add_node("CATEGORY", width=64)
+    web_graph.add_node("CATEGORY OPTION", width=180)
+    web_graph.add_node("BUY", width=215)
+    web_graph.add_node("PRODUCT IN CART", width=670)
 
-    web_graph.add_edge("A", "B", weight=300)
-    web_graph.add_edge("B", "C", weight=200)
-    web_graph.add_edge("C", "D", weight=100)
-    web_graph.add_edge("D", "Z", weight=50)
-    src_node, dest_node = "A", "Z"
-    total_id = web_graph.id_difficulty(src_node, dest_node)
+    web_graph.add_edge("HOME", "SEARCH", weight=380)
+    web_graph.add_edge("HOME", "CART", weight=670)
+    web_graph.add_edge("HOME", "PRODUCT", weight=530)
+    web_graph.add_edge("HOME", "CATEGORY", weight=505)
+    web_graph.add_edge("PRODUCT", "ADD TO CART", weight=700)
+    web_graph.add_edge("PRODUCT", "BUY", weight=695)
+    web_graph.add_edge("PRODUCT", "CATEGORY OPTION", weight=400)
+    web_graph.add_edge("PRODUCT", "SEARCH", weight=630)
+    web_graph.add_edge("SEARCH", "CART", weight=630)
+    web_graph.add_edge("ADD TO CART", "CART", weight=430)
+    web_graph.add_edge("PRODUCT IN CART", "CART", weight=580)
+    web_graph.add_edge("PRODUCT IN CART", "BUY", weight=680)
+    web_graph.add_edge("BUY", "CART", weight=380)
+    web_graph.add_edge("CATEGORY", "CART", weight=740)
+    web_graph.add_edge("CATEGORY", "CATEGORY OPTION", weight=190)
 
-    print("Total ID dari node {} ke node {} adalah {}".format(src_node, dest_node, total_id))
+    print("Shortest path from HOME to BUY: ", nx.shortest_path(web_graph.graph, source="HOME", target="BUY", weight='weight'))
+
+    print("The ID is", web_graph.id_difficulty("HOME", "BUY"))
+
 
     
  
